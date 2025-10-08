@@ -1,0 +1,11 @@
+[[redirects]]
+  from = "http://*"
+  to = "https://:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.yeticonstruction.ca/*"
+  to = "https://yeticonstruction.ca/:splat"
+  status = 301
+  force = true
