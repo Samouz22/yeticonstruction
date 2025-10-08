@@ -285,3 +285,108 @@ a:hover{ text-decoration:underline }
 .font-ui{ font-family:var(--font-ui) }
 .text-green{ color:var(--green-text)!important }  /* à réserver aux textes ≥ 20px */
 .border-green{ border-color:var(--green)!important }
+.uc-inner { max-width: 760px; }
+/* Mise en page */
+.uc-inner { max-width: 760px; text-align: center; }
+.social-links { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+.under-construction .social-ico { 
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 14px; border-radius:12px; 
+  font:800 15px/1 var(--font-ui); text-decoration:none; 
+  border:0; color:#fff;             /* icône + texte en blanc */
+}
+/* ===== Boutons "glassy" pour la section under-construction ===== */
+.uc-inner { max-width: 760px; text-align: center; }
+.social-links { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+/* Base glassmorphism (fond translucide, flou, reflet) */
+.under-construction .social-ico{
+  position:relative; isolation:isolate;
+  display:inline-flex; align-items:center; gap:10px;
+  padding:12px 16px;
+  border-radius:16px;
+  color:#fff; text-decoration:none; border:1px solid rgba(255,255,255,.22);
+  font:800 15px/1 var(--font-ui);
+  background:rgba(255,255,255,.06);             /* verre */
+  backdrop-filter:saturate(140%) blur(10px);     /* flou du verre */
+  -webkit-backdrop-filter:saturate(140%) blur(10px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.15),         /* liseré interne */
+    0 8px 22px rgba(0,0,0,.28);                  /* ombre douce */
+  transition: transform .18s ease, box-shadow .18s ease, filter .2s ease;
+}
+.under-construction .social-ico svg{
+  width:22px; height:22px; flex:0 0 auto; fill:currentColor;
+}
+.under-construction .social-ico:hover{
+  transform:translateY(-2px);
+  filter: brightness(1.05);
+}
+.under-construction .social-ico:focus-visible{
+  outline:none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.35),
+    0 10px 26px rgba(0,0,0,.35);
+}
+
+/* Bordure dégradée fine (couleur de marque) */
+.under-construction .social-ico::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  pointer-events:none; opacity:.95;
+  background: var(--brand-grad, linear-gradient(90deg, #fff, #fff));
+}
+
+/* Reflet subtile sur le verre */
+.under-construction .social-ico::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(255,255,255,.25), transparent 55%),
+    linear-gradient(180deg, transparent 60%, rgba(255,255,255,.06));
+  mix-blend-mode:screen; opacity:.7;
+}
+
+/* === Déclinaisons marque (dégradé utilisé pour la bordure & la lueur) === */
+.under-construction .social-ico.insta{
+  --brand-grad: conic-gradient(from 210deg at 25% 120%, #f9ed32, #ff3838, #d6249f, #285AEB, #f9ed32);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.15),
+    0 8px 22px rgba(214,36,159,.28); /* lueur IG */
+}
+.under-construction .social-ico.insta:hover{ filter:saturate(112%) brightness(1.06) }
+
+.under-construction .social-ico.fb{
+  --brand-grad: linear-gradient(90deg, #93c5fd, #60a5fa, #2563eb);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.15),
+    0 8px 22px rgba(24,119,242,.28); /* lueur FB */
+}
+.under-construction .social-ico.fb:hover{ filter:saturate(108%) brightness(1.06) }
+
+/* Respect des préférences — réduit les animations si demandé */
+@media (prefers-reduced-motion: reduce){
+  .under-construction .social-ico,
+  .under-construction .social-ico:hover{
+    transition:none; transform:none; filter:none;
+  }
+}
+
+
+/* Placeholder "Photos à venir" pour la section des réalisations */
+.projects-placeholder{
+  display:none;
+  margin-top:14px;
+  padding:22px;
+  text-align:center;
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
+  color:var(--muted);
+  font:800 16px/1.2 var(--font-ui);
+  box-shadow:0 6px 18px rgba(91,103,68,.25);
+}
+
+/* Quand la section a la classe is-placeholder : on cache la grille, on montre le message */
+.projects.is-placeholder .projects-grid{ display:none }
+.projects.is-placeholder .projects-placeholder{ display:block }
